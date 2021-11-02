@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from "axios";
 import { IUserData } from "./IUserData";
 type CallBack = ()=>void;
 
@@ -27,6 +28,13 @@ export class User  {
 
             handlers.forEach(callBack=>{
                 callBack();
+            });
+        }
+
+        fetch(): void  {
+            axios.get(`http://localhost:3000/users/${this.get('id')}`)
+            .then((response:AxiosResponse):void =>{
+                    this.set(response.data);
             });
         }
 }
